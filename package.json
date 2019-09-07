@@ -1,0 +1,29 @@
+{
+  "name": "rechat",
+  "version": "1.0.0",
+  "description": "Small safety chat",
+  "author": "Befezdow",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "cross-env": "^5.2.0",
+    "koa": "^2.8.1",
+    "koa-router": "^7.4.0",
+    "koa-socket-2": "^1.2.0",
+    "nuxt": "^2.0.0",
+    "socket.io": "^2.2.0",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "vue-socket.io": "^3.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9",
+    "@nuxtjs/vuetify": "^1.0.0"
+  }
+}
