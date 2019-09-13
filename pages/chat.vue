@@ -1,7 +1,9 @@
 <template>
-  <h1>
-    Chat page {{ user ? user.name : 'Unknown' }}
-  </h1>
+  <div>
+    <ul>
+      <li v-for="message in messages" :key="message.id">{{ message.text }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -15,7 +17,7 @@
     },
     middleware: ['chat'],
     computed: {
-      ...mapState(['user'])
+      ...mapState(['user', 'messages'])
     }
   }
 </script>
