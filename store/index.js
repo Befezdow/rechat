@@ -10,11 +10,8 @@ export const mutations = {
   clearUser(state) {
     state.user = null;
     state.messages = [];
-  }
-};
-
-export const actions = {
-  SOCKET_response(ctx, data) {
-    console.log(`Server: ${data.text}`);
+  },
+  SOCKET_newMessage(state, message) {
+    state.messages.push(message);
   }
 };

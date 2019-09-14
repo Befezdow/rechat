@@ -44,6 +44,7 @@
 
 <script>
   import { mapMutations } from 'vuex';
+  import { SignalTypes } from '../server/helper';
 
   export default {
     sockets: {
@@ -76,9 +77,23 @@
             name: this.name,
             room: this.room
           };
-          this.setUser(user);
-          this.$router.push('/chat');
+
+          this.connectUser(user);
         }
+      },
+
+      connectUser(user) {
+        this.$socket.emit(SignalTypes.USER_JOINED, user, response => {
+          if (response.ok) {
+            this.setUser({
+              id: response.data.userId,
+              ...user
+            });
+            this.$router.push('/chat');
+          } else {
+            console.error(response.error);
+          }
+        });
       }
     }
   }
