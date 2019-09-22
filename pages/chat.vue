@@ -8,7 +8,7 @@
       />
     </div>
 
-    <SendForm class="send-form"/>
+    <SendForm class="send-form" @send="onSend"/>
   </div>
 </template>
 
@@ -16,6 +16,7 @@
   import { mapState } from 'vuex';
   import Message from '../components/Message';
   import SendForm from '../components/SendForm';
+  import { SignalTypes } from '../server/helper';
 
   export default {
     components: { Message, SendForm },
@@ -27,6 +28,15 @@
     middleware: ['chat'],
     computed: {
       ...mapState(['user', 'messages'])
+    },
+    methods: {
+      onSend(text) {
+        const data = {
+          userId: this.$store.state.user.id,
+          text: text
+        };
+        this.$socket.emit(SignalTypes.CREATE_MESSAGE, data);
+      }
     }
   }
 </script>

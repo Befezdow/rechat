@@ -1,13 +1,14 @@
 <template>
   <div class="root">
     <v-text-field
+      v-model="text"
       class="input-field"
       label="New message"
       outlined
-      hide-details="true"
+      :hide-details="true"
     ></v-text-field>
 
-    <v-btn color="primary">
+    <v-btn color="primary" @click="sendMessage">
       Send
     </v-btn>
   </div>
@@ -15,7 +16,14 @@
 
 <script>
  export default {
-
+   data: () => ({
+     text: ''
+   }),
+   methods: {
+     sendMessage() {
+       this.$emit('send', this.text);
+     }
+   }
  }
 </script>
 

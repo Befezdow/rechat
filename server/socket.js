@@ -32,4 +32,8 @@ io.on(SignalTypes.USER_JOINED, (ctx, data) => {
   });
 });
 
+io.on(SignalTypes.CREATE_MESSAGE, (ctx, data) => {
+  console.log(data);
+});
+
 module.exports = io;
