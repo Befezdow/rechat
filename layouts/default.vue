@@ -12,7 +12,7 @@
       </v-toolbar-title>
     </v-app-bar>
 
-    <v-navigation-drawer app v-model="drawer">
+    <v-navigation-drawer app v-model="drawer" mobile-break-point="650">
       <v-list subheader>
         <v-subheader>Room users</v-subheader>
 
@@ -33,14 +33,12 @@
     </v-navigation-drawer>
 
     <v-content>
-      <div>
-        <nuxt/>
-      </div>
+      <nuxt/>
     </v-content>
 
-    <v-footer app>
+<!--    <v-footer app>-->
 
-    </v-footer>
+<!--    </v-footer>-->
   </v-app>
 </template>
 

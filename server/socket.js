@@ -21,12 +21,14 @@ io.on(SignalTypes.USER_JOINED, (ctx, data) => {
   ctx.acknowledge(response);
   ctx.socket.emit(SignalTypes.NEW_MESSAGE, {
     sender: 'admin',
-    text: `Welcome ${data.name}.`
+    text: `Welcome ${data.name}`,
+    isSystem: true
   });
   ctx.socket.join(data.room);
   ctx.socket.broadcast.to(data.room).emit(SignalTypes.NEW_MESSAGE, {
     sender: 'admin',
-    text: `User ${data.name} has joined.`
+    text: `User ${data.name} has joined`,
+    isSystem: true
   });
 });
 
