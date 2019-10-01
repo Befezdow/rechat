@@ -1,7 +1,8 @@
 const SignalTypes = {
   USER_JOINED: 'userJoined',
+  USER_LEFT: 'userLeft',
   NEW_MESSAGE: 'newMessage',
-  CREATE_MESSAGE: 'createMessage'
+  UPDATE_USERS: 'updateUsers'
 };
 
 module.exports = {

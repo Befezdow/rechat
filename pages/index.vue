@@ -91,7 +91,7 @@
             });
             this.$router.push('/chat');
           } else {
-            console.error(response.error);
+            this.$router.push(`/?message=${response.error}`);
           }
         });
       }

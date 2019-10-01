@@ -26,7 +26,7 @@
           </v-list-item-content>
 
           <v-list-item-icon>
-            <v-icon :color="roomUser.id === 1 ? 'primary' : 'grey'">mdi-message</v-icon>
+            <v-icon :color="roomUser.id === user.id ? 'primary' : 'grey'">mdi-message</v-icon>
           </v-list-item-icon>
         </v-list-item>
       </v-list>
@@ -35,32 +35,19 @@
     <v-content>
       <nuxt/>
     </v-content>
-
-<!--    <v-footer app>-->
-
-<!--    </v-footer>-->
   </v-app>
 </template>
 
 <script>
   import { mapState, mapMutations } from 'vuex';
+  import { SignalTypes } from '../server/helper';
 
   export default {
     data: () => ({
-      drawer: false,
-      roomUsers: [
-        {
-          id: 1,
-          name: 'Pol'
-        },
-        {
-          id: 2,
-          name: 'Chuks'
-        }
-      ],
+      drawer: false
     }),
     computed: {
-      ...mapState(['user']),
+      ...mapState(['user', 'roomUsers']),
       loggedIn() {
         return this.user !== null;
       },
@@ -71,9 +58,14 @@
     methods: {
       ...mapMutations(['clearUser']),
       leaveRoom() {
-        this.$router.push('/?message=leftChat');
-        this.clearUser();
-        console.log('leave room');
+        this.$socket(SignalTypes.USER_LEFT, {}, response => {
+          if (response.ok) {
+            this.$router.push('/?message=left_chat');
+            this.clearUser();
+          } else {
+            this.$router.push(`/?message=${response.error}`);
+          }
+        });
       },
       switchDrawer() {
         this.drawer = !this.drawer;

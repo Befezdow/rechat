@@ -2,13 +2,14 @@
   <div class="wrapper">
     <div class="chat-history">
       <Message v-for="message in messages" :key="message.id"
-               :author="message.sender"
+               :author="message.senderName"
                :text="message.text"
                :is-system="message.isSystem"
+               :owned="message.senderId === user.id"
       />
     </div>
 
-    <SendForm class="send-form" @send="onSend"/>
+    <SendForm ref="sendForm" class="send-form" @send="onSend"/>
   </div>
 </template>
 
@@ -31,11 +32,13 @@
     },
     methods: {
       onSend(text) {
-        const data = {
-          userId: this.$store.state.user.id,
-          text: text
-        };
-        this.$socket.emit(SignalTypes.CREATE_MESSAGE, data);
+        this.$socket.emit(SignalTypes.NEW_MESSAGE, {text}, response => {
+          if (response.ok) {
+            this.$refs.sendForm.clearForm();
+          } else {
+            this.$router.push(`/?message=${response.error}`);
+          }
+        });
       }
     }
   }

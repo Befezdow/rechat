@@ -22,6 +22,9 @@
    methods: {
      sendMessage() {
        this.$emit('send', this.text);
+     },
+     clearForm() {
+       this.text = '';
      }
    }
  }

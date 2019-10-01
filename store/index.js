@@ -1,6 +1,7 @@
 export const state = () => ({
   user: null,
-  messages: []
+  messages: [],
+  roomUsers: []
 });
 
 export const mutations = {
@@ -12,6 +13,10 @@ export const mutations = {
     state.messages = [];
   },
   SOCKET_newMessage(state, message) {
+    console.log(message);
     state.messages.push(message);
+  },
+  SOCKET_updateUsers(state, data) {
+    state.roomUsers = data.users;
   }
 };
