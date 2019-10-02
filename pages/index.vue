@@ -1,7 +1,7 @@
 <template>
-  <v-layout column justify-center align-center style="height:100%">
-    <v-flex xs12 sm8>
-      <v-card min-width="400">
+  <v-layout column justify-center align-center fill-height>
+    <v-flex cols="12" sm="8" fill-height>
+      <v-card class="login-card">
         <v-card-title>
           ReChat
         </v-card-title>
@@ -132,3 +132,14 @@
     }
   }
 </script>
+
+<style scoped lang="stylus">
+  .login-card {
+    min-width 400px;
+    margin-top: 100px;
+
+    @media screen and (max-width: 768px) {
+      min-width 300px;
+    }
+  }
+</style>
