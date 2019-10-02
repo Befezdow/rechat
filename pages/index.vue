@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
+  <v-layout column justify-center align-center style="height:100%">
     <v-flex xs12 sm8>
       <v-card min-width="400">
         <v-card-title>
@@ -39,6 +39,13 @@
         </v-card-text>
       </v-card>
     </v-flex>
+
+    <v-snackbar v-model="showSnackbar" :timeout="3000" bottom right>
+      {{ snackbarText }}
+      <v-btn color="red" text @click="snackbar = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-layout>
 </template>
 
@@ -56,6 +63,8 @@
       title: 'Welcome to ReChat'
     },
     data: () => ({
+      showSnackbar: false,
+      snackbarText: '',
       valid: true,
       name: '',
       nameRules: [
@@ -95,6 +104,31 @@
           }
         });
       }
+    },
+    mounted() {
+      const { message } = this.$route.query;
+      if (!message) {
+        return;
+      }
+
+      switch (message) {
+        case 'no_user':
+          this.snackbarText = 'You should log in';
+          break;
+        case 'left_chat':
+          this.snackbarText = 'You left chat';
+          break;
+        case ErrorTypes.INVALID_DATA:
+          this.snackbarText = 'Internal error: invalid data';
+          break;
+        case ErrorTypes.USER_NOT_FOUND:
+          this.snackbarText = 'Internal error: user not found';
+          break;
+        default:
+          this.snackbarText = message;
+          break;
+      }
+      this.showSnackbar = true;
     }
   }
 </script>

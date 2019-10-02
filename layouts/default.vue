@@ -58,7 +58,7 @@
     methods: {
       ...mapMutations(['clearUser']),
       leaveRoom() {
-        this.$socket(SignalTypes.USER_LEFT, {}, response => {
+        this.$socket.emit(SignalTypes.USER_LEFT, {}, response => {
           if (response.ok) {
             this.$router.push('/?message=left_chat');
             this.clearUser();

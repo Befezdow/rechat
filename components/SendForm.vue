@@ -6,6 +6,7 @@
       label="New message"
       outlined
       :hide-details="true"
+      @keypress="onKeyPressed"
     ></v-text-field>
 
     <v-btn color="primary" @click="sendMessage">
@@ -25,6 +26,11 @@
      },
      clearForm() {
        this.text = '';
+     },
+     onKeyPressed(event) {
+       if (event.code === 'Enter') {
+         this.sendMessage();
+       }
      }
    }
  }

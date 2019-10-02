@@ -11,6 +11,7 @@ export const mutations = {
   clearUser(state) {
     state.user = null;
     state.messages = [];
+    state.roomUsers = [];
   },
   SOCKET_newMessage(state, message) {
     console.log(message);

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="chat-history">
+    <div class="chat-history" ref="chat">
       <Message v-for="message in messages" :key="message.id"
                :author="message.senderName"
                :text="message.text"
@@ -39,6 +39,13 @@
             this.$router.push(`/?message=${response.error}`);
           }
         });
+      }
+    },
+    watch: {
+      messages() {
+        setTimeout(() => {
+          this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
+        }, 0);
       }
     }
   }
