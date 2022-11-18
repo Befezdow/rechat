@@ -16,7 +16,7 @@
     "koa": "^2.8.1",
     "koa-router": "^7.4.0",
     "koa-socket-2": "^1.2.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "socket.io": "^2.2.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
